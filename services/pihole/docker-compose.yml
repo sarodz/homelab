@@ -1,0 +1,28 @@
+services:
+  pihole:
+    image: pihole/pihole:latest
+    container_name: pihole
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "8081:80/tcp"
+    dns:
+      - 127.0.0.1
+      - 9.9.9.9
+    environment:
+      TZ: 'America/Toronto'
+      WEBPASSWORD: ${PIHOLE_PASSWORD}
+      PIHOLE_DNS_: 9.9.9.9;149.112.112.112;1.1.1.1
+      DNSSEC: 'true'
+      ServerIP: 192.168.2.83 # The IP of the host the container is running in
+      WEBTHEME: default-dark
+      PIHOLE_DOMAIN: lan
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+    networks: 
+      - lan
+
+networks:
+  lan:
+    external: true
