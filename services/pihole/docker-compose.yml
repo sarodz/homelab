@@ -14,7 +14,7 @@ services:
       WEBPASSWORD: ${PIHOLE_PASSWORD}
       PIHOLE_DNS_: 9.9.9.9;149.112.112.112;1.1.1.1
       DNSSEC: 'true'
-      ServerIP: 192.168.2.83 # The IP of the host the container is running in
+      ServerIP: ${HOST_IP}
       WEBTHEME: default-dark
       PIHOLE_DOMAIN: lan
     cap_add:
