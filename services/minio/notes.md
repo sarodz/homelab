@@ -1,0 +1,1 @@
+Need to enable websocket support in reverse proxy

@@ -1,0 +1,19 @@
+services:
+  minio:
+    image: quay.io/minio/minio
+    container_name: minio
+    ports:
+      - "9900:9900"
+      - "9901:9901"
+    networks:
+      - lan
+    environment:
+      MINIO_ROOT_USER: ${MINIO_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_PASSWORD}
+    volumes:
+      - /data/minio:/data
+    command: server --address ":9900" --console-address ":9901" /data
+
+networks:
+  lan:
+    external: true
