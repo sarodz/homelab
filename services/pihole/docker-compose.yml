@@ -20,6 +20,9 @@ services:
     cap_add:
       - NET_ADMIN
     restart: unless-stopped
+    volumes:
+      - /data/pihole/etc:/etc/pihole
+      - /data/pihole/dnsmasq.d:/etc/dnsmasq.d
     networks: 
       - lan
 
