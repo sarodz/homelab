@@ -28,7 +28,7 @@ sudo mkdir /mnt/onedrive/backup/test
 sudo restic -r /mnt/onedrive/backup/test init
 ```
 
-4. Setup `resticprofile` by renaming the latest version of the configuration file (Ex:`v0.yaml`) as `profiles.yaml` and creating a `password.txt` containing only the restic profile password place them at `/usr/local/etc/resticprofile`.
+4. Setup `resticprofile` by renaming the latest version of the configuration file in this repo (Ex:`v0.yaml`) as `profiles.yaml` and creating a `password.txt` containing only the restic profile password place them at `/usr/local/etc/resticprofile`.
 
 5. Now we can schedule the backups by running `sudo resticprofile schedule` and that's it!
 
