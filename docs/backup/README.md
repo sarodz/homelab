@@ -38,7 +38,7 @@ However the same can be achieved using [`resticprofile`](https://creativeproject
 ```
 sudo restic -r rclone:ms:backup/test2 snapshots
 ```
-OR
+Or
 ```
 sudo resticprofile backup snapshots
 ```
