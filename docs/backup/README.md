@@ -35,7 +35,7 @@ sudo restic -r /mnt/onedrive/backup/test init
 ## How to Recover
 1. Find the snapshot id you want to recover (or simply use `latest` if you want the latest snapshot)
 ```
-sudo restic -r rclone:ms:backup/test2 snapshots
+sudo restic -r rclone:ms:backup/test snapshots
 ```
 Or
 ```
