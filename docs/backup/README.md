@@ -21,13 +21,12 @@ chmod +x install.sh
 sudo ./install.sh -b /usr/local/bin
 ```
 
-3. I have used the following to setup the repository (as I was not aware of `resticprofile` at the time)
+3. I have used the following to setup the repository (as I was not aware of `resticprofile` at the time and [how it can achieve the same](https://creativeprojects.github.io/resticprofile/configuration/getting_started/index.html#initialize-your-repository))
 ```
 sudo rclone mount ms:backup /mnt/onedrive/backup
 sudo mkdir /mnt/onedrive/backup/test
 sudo restic -r /mnt/onedrive/backup/test init
 ```
-However the same can be achieved using [`resticprofile`](https://creativeprojects.github.io/resticprofile/configuration/getting_started/index.html#initialize-your-repository).
 
 4. Setup `resticprofile` by renaming the latest version of the configuration file (Ex:`v0.yaml`) as `profiles.yaml` and creating a `password.txt` containing only the restic profile password place them at `/usr/local/etc/resticprofile`.
 
