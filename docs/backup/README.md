@@ -21,7 +21,7 @@ chmod +x install.sh
 sudo ./install.sh -b /usr/local/bin
 ```
 
-3. I have used the following to setup the repository (as I was not aware of `resticprofile` at the time and [how it can achieve the same](https://creativeprojects.github.io/resticprofile/configuration/getting_started/index.html#initialize-your-repository))
+3. I have used the following to setup the repository (as I was not aware of `resticprofile` at the time and [how it can achieve the same](https://creativeprojects.github.io/resticprofile/configuration/getting_started/index.html#initialize-your-repository)) Repository is `restic`'s destination location for storing data.
 ```
 sudo rclone mount ms:backup /mnt/onedrive/backup
 sudo mkdir /mnt/onedrive/backup/test
