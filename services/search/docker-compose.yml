@@ -27,7 +27,7 @@ services:
     networks:
       - lan
     ports:
-      - "8082:8080"
+      - "8083:8080"
     volumes:
       - ./searxng:/etc/searxng:rw
     environment:
