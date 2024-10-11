@@ -1,0 +1,12 @@
+version: "1"
+
+default:
+  repository: "rclone:ms:backup/pi/v0"
+  password-file: "password.txt"
+
+  backup:
+    verbose: true
+    source:
+      - "/data"
+    schedule: "daily"
+    schedule-permission: "system"
