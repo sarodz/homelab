@@ -1,5 +1,5 @@
 # Backing Up Services
-## Intro - Why I Chose to Backup at the Host Level
+## Why I Chose to Backup at the Host Level
 We might need access to all of the filesystem at the hardware the services are running when backing up. If we create a backup service using a container and give access to all of the data in other containers, I believe it undermines the whole reason to use containers. I am not coming from a feasibility view (because [it can be done](https://www.costin.rocks/blog/posts/automate-and-optimize-rclone-in-docker)) but from best principles. I have reviewed other solutions that [create periodic ISO images](https://nerd-tech.net/2022/09/08/how-to-make-a-live-backup-of-your-raspberry-pi-ubuntu-raspberry-pi-os-server-to-create-live-bootable-iso-images-on-an-external-drive/) but I felt that solution could be an overkill (even though it will provide better recovery times). I wanted to use an open source backup tool with active development that is easy to use and provide backup at no cost (I already have an OneDrive subscription so why get a new storage space for my initial backup implementation?). I ran into this [post](https://alikhallad.com/incremental-backups-with-rclone-restic/) showing how easy it is to use `restic`. After experimenting with it, I am happy to say it met my goals. 
 
 > [!IMPORTANT]
