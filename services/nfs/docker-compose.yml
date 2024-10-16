@@ -1,0 +1,15 @@
+services:
+  nfs:
+    container_name: nfs
+    image: itsthenetwork/nfs-server-alpine:latest
+    restart: unless-stopped
+    privileged: true
+    volumes:
+      - /data/nfs:/data
+    environment:
+      - SHARED_DIRECTORY=/shared
+      - SYNC=true
+      - PERMITTED=${PERMITTED_IPS}
+    network_mode: host
+    ports:
+      - 2049:2049

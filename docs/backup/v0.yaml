@@ -1,0 +1,26 @@
+version: "1"
+
+groups:
+  full-backup:
+    - cloud
+    - nfs
+
+cloud:
+  repository: "rclone:ms:backup/pi/v0"
+  password-file: "password1.txt"
+  backup:
+    verbose: true
+    source:
+      - "/data"
+    schedule: "daily"
+    schedule-permission: "system"
+
+nfs:
+  repository: "local:/mnt/nfs/pi/v0"
+  password-file: "password2.txt"
+  backup:
+    verbose: true
+    source:
+      - "/data"
+    schedule: "daily"
+    schedule-permission: "system"
