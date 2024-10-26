@@ -34,7 +34,8 @@ services:
     volumes:
       - /data/ollama:/root/.ollama
     enviroment:
-      OLLAMA_ORIGINS: "*"
+      - OLLAMA_ORIGINS="*"
+      # - OLLAMA_HOST=0.0.0.0
     networks:
       - lan
 
