@@ -1,0 +1,19 @@
+services:
+  external-proxy:
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: external-proxy
+    restart: unless-stopped
+    ports:
+      - '8008:81' # Admin Web Port
+    expose:
+      - 80
+      - 443
+    volumes:
+      - /data/external-proxy/data:/data
+      - /data/extarnal-proxy/letsencrypt:/etc/letsencrypt
+    networks:
+      - external
+
+networks:
+  external:
+    external: true
