@@ -10,7 +10,7 @@ services:
       - 443
     volumes:
       - /data/external-proxy/data:/data
-      - /data/extarnal-proxy/letsencrypt:/etc/letsencrypt
+      - /data/external-proxy/letsencrypt:/etc/letsencrypt
     networks:
       - external
 
