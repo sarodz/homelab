@@ -1,6 +1,4 @@
-# service description
 services:
-  # cloudflare tunnel
   cloudflare-tunnel:
     image: cloudflare/cloudflared
     container_name: cloudflare-tunnel
@@ -11,6 +9,15 @@ services:
       - /etc/localtime:/etc/localtime:ro
     environment:
       - "TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}"
+    networks:
+      - external
+  caddy:
+    container_name: web
+    image: caddy:2.8.4
+    restart: unless-stopped
+    expose:
+      - 80
+      - 443
     networks:
       - external
 
