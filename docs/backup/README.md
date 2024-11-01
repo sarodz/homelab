@@ -19,42 +19,38 @@ We might need access to all of the filesystem at the hardware the services are r
 2. Setup a NFS server as outlined using the `docker-compose.yml` in the `services/nfs` folder.
 
 3. Download `restic` and `resticprofile`. I have used the following command to download the `resticprofile` (it doesn't download `restic`)
-```
+```bash
 curl -LO https://raw.githubusercontent.com/creativeprojects/resticprofile/master/install.sh
 chmod +x install.sh
 sudo ./install.sh -b /usr/local/bin
 ```
 
-4. (Optional, can skip this step) I have used the following to setup the repository (as I was not aware of `resticprofile` at the time and [how it can achieve the same](https://creativeprojects.github.io/resticprofile/configuration/getting_started/index.html#initialize-your-repository)) Repository is `restic`'s destination location for storing data.
-```
-sudo rclone mount ms:backup /mnt/onedrive/backup
-sudo mkdir /mnt/onedrive/backup/test
-sudo restic -r /mnt/onedrive/backup/test init
-```
-
-5. Setup `resticprofile` by renaming the latest version of the configuration file in this repo (Ex:`v0.yaml`) as `profiles.yaml` and creating a `password.txt` containing only the restic profile password place them at `/usr/local/etc/resticprofile`.
-If you have skipped step 4, you can use the following to initialize repositories
-```
+4. Setup `resticprofile` by renaming the latest version of the configuration file in this repo (Ex:`v0.yaml`) as `profiles.yaml` and creating a `password.txt` containing only the restic profile password place them at `/usr/local/etc/resticprofile`.
+```bash
 sudo resticprofile --name full-backup init
 ```
+Note: You can also create the password file using the following command
+```bash
+sudo bash -c "resticprofile generate --random-key > /usr/local/etc/resticprofile/FILE_NAME.txt"
+```
 
-6. Now we can schedule the backups by running `sudo resticprofile --name full-backup schedule` and that's it!
+5. Now we can schedule the backups by running `sudo resticprofile --name full-backup schedule` and that's it!
+> [!NOTE]
+> Seems like when we use inheritence, calling the full-backup group causes an error for v1 format of the profile. Hence I needed call each group seperatly.
 
 ## How to Recover
 1. Find the snapshot id you want to recover (or simply use `latest` if you want the latest snapshot)
-```
-sudo restic -r rclone:ms:backup/test snapshots
-```
-Or
-```
-sudo resticprofile backup snapshots
+```bash
+sudo resticprofile --name profile-name snapshots
 ```
 
 2. Use that id retrieved in the last step to restore your data
+```bash
+sudo resticprofile --name profile-name restore <SNAPSHOT-ID> --target <PATH-TO-RESTORE>
 ```
-sudo restic -r rclone:ms:backup/test --verbose restore <SNAPSHOT-ID> --target <PATH-TO-RESTORE>
-```
-Or
-```
-sudo resticprofile backup restore <SNAPSHOT-ID> --target <PATH-TO-RESTORE>
+
+### Gocthas
+* If you are going to change the profile and want to unschedule the current restic profile(s), you should not remove the profile file until you unschedule the backup(s). Otherwise you might have to identify the running process [and remove them.](https://superuser.com/questions/513159/how-to-remove-systemd-services)
+```bash
+systemctl list-unit-files | grep restic
 ```

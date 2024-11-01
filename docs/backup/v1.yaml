@@ -1,0 +1,27 @@
+version: "1"
+
+{{ $machine_name := "MACHINE_NAME" }}
+{{ $version := "v1" }}
+
+groups:
+  full-backup:
+    - cloud
+    - nfs
+
+base:
+  backup:
+    verbose: true
+    source:
+      - "/data"
+    schedule: "daily"
+    schedule-permission: "system"
+
+cloud:
+  inherit: base
+  repository: "rclone:ms:backup/{{ $machine_name }}/{{ $version }}"
+  password-file: "{{ $machine_name }}_cloud_password.txt"
+
+nfs:
+  inherit: base
+  repository: "local:/mnt/nfs/{{ $machine_name }}/{{ $version }}"
+  password-file: "{{ $machine_name }}_nfs_password.txt"
