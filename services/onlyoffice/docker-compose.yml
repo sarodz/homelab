@@ -36,7 +36,7 @@ services:
       - lan
       - onlyoffice
        
-  rabbitmq:
+  onlyoffice-rabbitmq:
     container_name: onlyoffice-rabbitmq
     image: rabbitmq
     restart: always
@@ -45,7 +45,7 @@ services:
     networks:
       - onlyoffice
 
-  postgresql:
+  onlyoffice-postgresql:
     container_name: onlyoffice-postgresql
     image: postgres:14
     environment:
