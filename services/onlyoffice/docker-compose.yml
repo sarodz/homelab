@@ -153,11 +153,9 @@ services:
       - onlyoffice
     stdin_open: true
     tty: true
-
 networks:
   onlyoffice:
     driver: 'bridge'
-
 volumes:
   mail_data:
   mail_certs:

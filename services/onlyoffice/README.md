@@ -1,0 +1,1 @@
+Don't forget adding the `MAIL_SERVER_HOSTNAME` enviroment variable
