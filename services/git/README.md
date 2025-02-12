@@ -1,0 +1,2 @@
+# Gotchas
+* If you are a trying to run any gitea commands in the container, you will see an error saying "Gitea is not supposed to be run as root". To get around this you need to run the command as `su git gitea help` so that you don't run it as root.
