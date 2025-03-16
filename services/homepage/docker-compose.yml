@@ -5,7 +5,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - /data/homepage:/app/config
+      - ./config:/app/config
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       HOMEPAGE_ALLOWED_HOSTS: ${HOMEPAGE_HOST}
