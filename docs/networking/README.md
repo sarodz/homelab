@@ -1,31 +1,15 @@
 # Networking Basics
 ## Resolving the Right DNS
-In the current setup I want all my servers to use pihole as their DNS server. For my latest server, I have manually set this up. Do not change the `/etc/resolv.conf` file as other services can modify this file. To see the current DNS resolution use `resolvectl status`. If this is not pointing to the right IP address, you can do one of the two to solve this issue.
+After moving to AdGuard, I do not need to manually update DNS server for each client in the network. Once they connect to the network AdGuard simply handles the rest.
 
-### Solution 1: Change `netplan` Config
-Modify the `/etc/netplan/50-cloud-init.yaml` file and add the following in the right interface (Ex: `wlp3s0`):
-```yaml
-...
-nameservers:
-    addresses:
-        - IP1
-        - IP2
-```
-Once this is changed run `sudo netplan try` and try `resolvectl status`. If it is pointing to the right IP address, then you have succesfully changed your DNS server. 
-
-[Source](https://unix.stackexchange.com/questions/750906/how-do-i-permanently-configure-the-dns-resolution-in-ubuntu-for-all-programs-lay)
-
-### Solution 2: Update `resolvectl` Directly
-Run the following command with the right IP addresses:
-```bash
-resolvectl dns INTERFACE IP1 IP2
-```
-`INTERFACE` can be `wlp3s0`, `wlp0s20f3`, ...
-
-### Confirm Changes
-You can confirm your changes by running the following in two seperate terminals:
+## Useful Commands
+You can use the following to trace your queries (They run in seperate terminals)
 ```bash
 sudo tcpdump -ni interface -p port 53
 
 dig google.com
 ```
+`interface` can be `wlp3s0`, `wlp0s20f3`, ... . Whatever your machine is using.
+
+## Useful Sources
+[Configuring DNS](https://unix.stackexchange.com/questions/750906/how-do-i-permanently-configure-the-dns-resolution-in-ubuntu-for-all-programs-lay)
