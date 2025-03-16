@@ -9,3 +9,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       HOMEPAGE_ALLOWED_HOSTS: ${HOMEPAGE_HOST}
+    networks:
+      - lan
+
+networks:
+  lan:
+    external: true
