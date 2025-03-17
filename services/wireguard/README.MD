@@ -1,0 +1,4 @@
+I have used the built-in UI to deploy a WireGuard Server. You need to do the following to access the services in your home network when connected to a client.
+* In the VPN dashboard at the **server**, click Options and toggle on the "Remote Access LAN". Restart to make sure the change takes hold.
+* (Optional) When you create a conf file for the client, make sure you only use the server's IP as your DNS to make sure the traffic is always resolved within the home router. 
+* Make sure the IP range used in your on-the-go router does not overlap with your home router's range. You can change this in the portable router's Network -> LAN section.
